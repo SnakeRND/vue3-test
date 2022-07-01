@@ -55,11 +55,9 @@ export default {
     async fetchPosts() {
       try {
         this.isPostsLoading = true;
-        setTimeout(async () => {
-          const response = await axios.get('https://my-json-server.typicode.com/typicode/demo/posts');
-          this.posts = response.data;
-          this.isPostsLoading = false;
-        }, 1000)
+        const response = await axios.get('https://my-json-server.typicode.com/typicode/demo/posts');
+        this.posts = response.data;
+        this.isPostsLoading = false;
       } catch (e) {
         alert('Ошибка')
       }
