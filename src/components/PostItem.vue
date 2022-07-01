@@ -6,7 +6,9 @@
       <div><strong>Описание: </strong>{{ post.description }}</div>
     </div>
     <div class="post_btns">
-      <post-button>
+      <post-button
+        @click="$emit('remove', post)"
+      >
         Удалить
       </post-button>
     </div>
