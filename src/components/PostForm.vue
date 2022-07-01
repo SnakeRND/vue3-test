@@ -3,12 +3,12 @@
   <form @submit.prevent>
     <h4>Создать пост</h4>
     <post-input
-        v-model="post.title"
+        v-model.trim="post.title"
         type="text"
         placeholder="Название"
     ></post-input>
     <post-input
-        v-model="post.description"
+        v-model.trim="post.description"
         type="text"
         placeholder="Описание"
     ></post-input>

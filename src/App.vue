@@ -5,6 +5,7 @@
     <h1>Посты</h1>
     <post-button
         @click="showModal"
+        style="margin: 15px 0;"
     >
       Создать пост
     </post-button>
