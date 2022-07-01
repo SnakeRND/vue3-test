@@ -1,13 +1,23 @@
 <template>
 
   <div class="app">
-    <post-form
-        @create="createPost"
-    />
+
+    <h1>Посты</h1>
+    <post-button
+        @click="showModal"
+    >
+      Создать пост
+    </post-button>
+    <post-modal v-model:show="modalVisible">
+      <post-form
+          @create="createPost"
+      />
+    </post-modal>
     <post-list
         :posts="posts"
         @remove="removePost"
     />
+
   </div>
 
 </template>
@@ -29,14 +39,19 @@ export default {
         {id: 4, title: 'Пост 4', description: 'Описание 4.'},
         {id: 5, title: 'Пост 5', description: 'Описание 5.'},
       ],
+      modalVisible: false,
     }
   },
   methods: {
     createPost(post) {
       this.posts.push(post);
+      this.modalVisible = false;
     },
     removePost(post) {
       this.posts = this.posts.filter(p => p.id !== post.id)
+    },
+    showModal() {
+      this.modalVisible = true;
     }
   }
 }
