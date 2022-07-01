@@ -3,12 +3,19 @@
   <div class="app">
 
     <h1>Посты</h1>
-    <post-button
-        @click="showModal"
-        style="margin: 15px 0;"
-    >
-      Создать пост
-    </post-button>
+    <div class="app_btns">
+      <post-button
+          @click="showModal"
+      >
+        Создать пост
+      </post-button>
+      <post-select
+        v-model="selectedSort"
+        :options="sortOptions"
+      >
+
+      </post-select>
+    </div>
     <post-modal v-model:show="modalVisible">
       <post-form
           @create="createPost"
@@ -39,6 +46,11 @@ export default {
       posts: [],
       modalVisible: false,
       isPostsLoading: false,
+      selectedSort: '',
+      sortOptions: [
+        {value: 'title', name: 'По названию'},
+        {value: 'description', name: 'По содержимому'},
+      ]
     }
   },
   methods: {
@@ -65,6 +77,14 @@ export default {
   },
   mounted() {
     this.fetchPosts();
+  },
+  watch: {
+    selectedSort(newValue) {
+      this.posts.sort((post1, post2) => {
+        return post1[newValue]?.localeCompare(post2[newValue]);
+      })
+    }
+
   }
 }
 </script>
@@ -78,5 +98,11 @@ export default {
 
 .app {
   padding: 20px;
+}
+
+.app_btns {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
 }
 </style>
